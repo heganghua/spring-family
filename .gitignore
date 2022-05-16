@@ -25,10 +25,13 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 <<<<<<< HEAD
+<<<<<<< HEAD
 *.prefs
 *.factorypath
 *.classpath
 =======
+=======
+>>>>>>> master
 
 # Import Spring Tool Suite gitigonre
 
@@ -69,5 +72,9 @@ hs_err_pid*
 .nb-gradle
 
 ### vscode ###
+<<<<<<< HEAD
 .vscode
 >>>>>>> 26cf8e7b8d563533d168ea3a83d8ec1db11ca7ea
+=======
+.vscode
+>>>>>>> master
