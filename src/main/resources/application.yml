@@ -1,14 +1,13 @@
 server:
   port: 80
   
- 
-#spring:
-#  elasticsearch:
-#    rest:
-#      uris:
-#      - 192.168.50.97:9200
-#      username: elastic
-#  data:
-#    elasticsearch:
-#      repositories:
-#        enabled: true
+elasticsearch:
+  schema: http
+  address: 127.0.0.1:9200
+  connectTimeout: 600000
+  socketTimeout: 600000
+  connectionRequestTimeout: 600000
+  maxConnectNum: 100
+  maxConnectPerRoute: 100
+
+  
