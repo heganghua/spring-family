@@ -43,7 +43,7 @@ public class EsTests {
     @Test
     public void insertDoc() throws Exception {
         User user = new User();
-        user.setId(123345L);
+        user.setId(1008L);
         user.setName("Lucy");
         user.setGender("gay");
         user.setAddr("Beijing");
@@ -61,6 +61,21 @@ public class EsTests {
     @Test
     public void getDoc() throws Exception {
         elasticSearchService.getDoc();
+    }
+
+    @Test
+    public void docQuery() throws Exception {
+        elasticSearchService.docQuery();
+    }
+
+    @Test
+    public void insertDocBatch() throws Exception {
+        elasticSearchService.insertDocBatch();
+    }
+
+    @Test
+    public void queryDocAsAll() throws Exception {
+        elasticSearchService.queryDocAsAll();
     }
 
     @Test

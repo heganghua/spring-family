@@ -16,4 +16,10 @@ public interface IElasticSearchService {
 
     void getDoc() throws IOException;
 
+    void docQuery() throws IOException;
+
+    void insertDocBatch() throws IOException;
+
+    void queryDocAsAll() throws IOException;
+
 }

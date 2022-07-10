@@ -2,10 +2,14 @@ package xyz.ganghua.service.impl;
 
 import java.io.IOException;
 
+import org.elasticsearch.action.bulk.BulkRequest;
+import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.get.GetRequest;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.action.index.IndexResponse;
+import org.elasticsearch.action.search.SearchRequest;
+import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.action.update.UpdateRequest;
 import org.elasticsearch.action.update.UpdateResponse;
 import org.elasticsearch.client.RestHighLevelClient;
@@ -14,6 +18,10 @@ import org.elasticsearch.client.indices.CreateIndexResponse;
 import org.elasticsearch.client.indices.GetIndexRequest;
 import org.elasticsearch.client.indices.GetIndexResponse;
 import org.elasticsearch.common.xcontent.XContentType;
+import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.search.SearchHit;
+import org.elasticsearch.search.SearchHits;
+import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -84,6 +92,59 @@ public class ElasticSearchService implements IElasticSearchService {
         getRequest.index("user").id("123345");
         GetResponse getResponse = client.get(getRequest, ElasticSearchHighLevalConfigure.COMMON_OPTIONS);
         System.out.println(getResponse.getSourceAsString());
+    }
+
+    /**
+     * 条件查询
+     */
+    @Override
+    public void docQuery() throws IOException {
+        SearchRequest request = new SearchRequest();
+        request.indices("user");
+        request.source(new SearchSourceBuilder().query(QueryBuilders.termQuery("gender", "男")));
+
+        SearchResponse response = client.search(request, ElasticSearchHighLevalConfigure.COMMON_OPTIONS);
+        SearchHits hits = response.getHits();
+        System.out.println(hits.getTotalHits());
+
+        for (SearchHit hit : hits) {
+            System.out.println(hit.getSourceAsString());
+        }
+
+    }
+
+    /**
+     * 批量插入
+     */
+    @Override
+    public void insertDocBatch() throws IOException {
+
+        BulkRequest bulkRequest = new BulkRequest();
+
+        bulkRequest.add(
+            new IndexRequest().index("user").id("1001").source(XContentType.JSON, "name", "zhangsan", "gender", "男的"));
+        bulkRequest
+            .add(new IndexRequest().index("user").id("1002").source(XContentType.JSON, "name", "lisi", "gender", "男的"));
+        bulkRequest.add(
+            new IndexRequest().index("user").id("1003").source(XContentType.JSON, "name", "wangwu", "gender", "女的"));
+        bulkRequest.add(
+            new IndexRequest().index("user").id("1001").source(XContentType.JSON, "name", "zhaoliu", "gender", "男的"));
+        BulkResponse bulk = client.bulk(bulkRequest, ElasticSearchHighLevalConfigure.COMMON_OPTIONS);
+        System.out.println(bulk.getTook());
+        System.out.println(bulk.getItems().toString());
+    }
+
+    @Override
+    public void queryDocAsAll() throws IOException {
+
+        SearchRequest searchRequest = new SearchRequest().indices("user");
+        searchRequest.source(new SearchSourceBuilder().query(QueryBuilders.matchAllQuery()));
+
+        SearchResponse search = client.search(searchRequest, ElasticSearchHighLevalConfigure.COMMON_OPTIONS);
+        SearchHits hits = search.getHits();
+        for (SearchHit searchHit : hits) {
+            System.out.println(searchHit.getSourceAsString());
+        }
     }
 
 }
