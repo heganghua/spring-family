@@ -67,6 +67,21 @@ public class EsTests {
     }
 
     @Test
+    public void docQuery() throws Exception {
+        elasticSearchService.docQuery();
+    }
+
+    @Test
+    public void insertDocBatch() throws Exception {
+        elasticSearchService.insertDocBatch();
+    }
+
+    @Test
+    public void queryDocAsAll() throws Exception {
+        elasticSearchService.queryDocAsAll();
+    }
+
+    @Test
     public void saveIndex() throws Exception {
         // IndexRequest indexRequest = new IndexRequest();
         // indexRequest.id("12308");
