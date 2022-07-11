@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import xyz.ganghua.dao.user.User;
+import xyz.ganghua.dao.user.UsersMapper;
 import xyz.ganghua.service.IElasticSearchService;
 
 @RunWith(SpringRunner.class)
@@ -19,6 +19,9 @@ public class EsTests {
 
     @Autowired
     private IElasticSearchService elasticSearchService;
+
+    @Autowired
+    private UsersMapper usersMapper;
 
     @Test
     public void contextLoads() {
@@ -42,20 +45,20 @@ public class EsTests {
 
     @Test
     public void insertDoc() throws Exception {
-        User user = new User();
-        user.setId(123345L);
-        user.setName("Lucy");
-        user.setGender("gay");
-        user.setAddr("Beijing");
-        elasticSearchService.insertDoc(user);
+        // User user = new User();
+        // user.setId(123345L);
+        // user.setName("Lucy");
+        // user.setGender("gay");
+        // user.setAddr("Beijing");
+        // elasticSearchService.insertDoc(user);
     }
 
     @Test
     public void updateDoc() throws Exception {
-        User user = new User();
-        user.setId(123345L);
-        user.setGender("女");
-        elasticSearchService.updateDoc(user);
+        // User user = new User();
+        // user.setId(123345L);
+        // user.setGender("女");
+        // elasticSearchService.updateDoc(user);
     }
 
     @Test

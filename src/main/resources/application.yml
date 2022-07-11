@@ -1,6 +1,25 @@
 server:
   port: 80
-  
+
+spring:
+  datasource:
+    name: external-data
+    username: ${database.username}
+    password: ${database.password}
+    url: jdbc:mysql://${database.host}:${database.port}/${database.dbname}?useSSL=false
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      connection-timeout: 10000
+      idle-timeout: 600000
+      max-lifetime: 3600000
+
+database:
+  username: root
+  password: root
+  host: localhost
+  port: 3306
+  dbname: datacenter
+
 elasticsearch:
   schema: http
   address: 127.0.0.1:9200
@@ -10,4 +29,7 @@ elasticsearch:
   maxConnectNum: 100
   maxConnectPerRoute: 100
 
-  
+
+
+
+

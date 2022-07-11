@@ -2,7 +2,7 @@ package xyz.ganghua.service;
 
 import java.io.IOException;
 
-import xyz.ganghua.dao.user.User;
+import xyz.ganghua.entity.Users;
 
 public interface IElasticSearchService {
 
@@ -10,9 +10,9 @@ public interface IElasticSearchService {
 
     void getIndex(String indexName);
 
-    void insertDoc(User user);
+    void insertDoc(Users users);
 
-    void updateDoc(User user) throws IOException;
+    void updateDoc(Users users) throws IOException;
 
     void getDoc() throws IOException;
 

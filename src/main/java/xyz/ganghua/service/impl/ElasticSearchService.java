@@ -18,7 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import xyz.ganghua.configs.ElasticSearchHighLevalConfigure;
-import xyz.ganghua.dao.user.User;
+import xyz.ganghua.entity.Users;
 import xyz.ganghua.service.IElasticSearchService;
 import xyz.ganghua.utils.data.JsonUtil;
 
@@ -56,7 +56,7 @@ public class ElasticSearchService implements IElasticSearchService {
     }
 
     @Override
-    public void insertDoc(User user) {
+    public void insertDoc(Users user) {
         IndexRequest request = new IndexRequest();
         request.index("user").id(user.getId().toString());
         String json = JsonUtil.toString(user);
@@ -70,7 +70,7 @@ public class ElasticSearchService implements IElasticSearchService {
     }
 
     @Override
-    public void updateDoc(User user) throws IOException {
+    public void updateDoc(Users user) throws IOException {
         UpdateRequest updateRequest = new UpdateRequest();
         updateRequest.index("user").id(user.getId().toString());
         updateRequest.doc(XContentType.JSON, "gender", user.getGender());
