@@ -1,4 +1,4 @@
-package xyz.ganghua.service;
+package xyz.ganghua.service.impl;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -34,7 +34,7 @@ public class ReadWordFile {
             if (!file.exists()) {
                 throw new RuntimeException("山哥，路径可能有错误哦！请再核对一下路径");
             } else {
-                System.out.println("接受到山哥传过来的参数， 参数为： " + arg);
+                System.out.println("接受到山哥传过来的参数，     参数为： " + arg);
             }
 
         } else {

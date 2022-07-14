@@ -31,7 +31,7 @@ import xyz.ganghua.service.IElasticSearchService;
 import xyz.ganghua.utils.data.JsonUtil;
 
 @Service
-public class ElasticSearchService implements IElasticSearchService {
+public class ElasticSearchServiceImpl implements IElasticSearchService {
 
     @Autowired
     private RestHighLevelClient client;

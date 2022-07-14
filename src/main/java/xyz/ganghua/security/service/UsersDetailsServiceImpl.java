@@ -1,4 +1,4 @@
-package xyz.ganghua.service.impl;
+package xyz.ganghua.security.service;
 
 import java.util.Objects;
 
