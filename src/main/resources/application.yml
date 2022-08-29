@@ -28,6 +28,11 @@ elasticsearch:
   connectionRequestTimeout: 600000
   maxConnectNum: 100
   maxConnectPerRoute: 100
+  
+debug: true
+logging:
+  level:
+    xyz.ganghua: debug
 
 
 

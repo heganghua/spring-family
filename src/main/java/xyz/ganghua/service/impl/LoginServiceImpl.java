@@ -32,10 +32,10 @@ public class LoginServiceImpl implements ILoginService {
         }
 
         // 登录成功
-        LoginUser principal = (LoginUser)authenticate.getPrincipal();
-        Users usersForSQL = principal.getUsers();
+        LoginUser loginUser = (LoginUser)authenticate.getPrincipal();
+        // Users usersForSQL = principal.getUsers();
         Map<String, Object> map = new HashMap<>();
-        map.put("users", usersForSQL);
+        map.put("loginUser", loginUser);
 
         String jwt = JwtUtil.createJWT(map);
 

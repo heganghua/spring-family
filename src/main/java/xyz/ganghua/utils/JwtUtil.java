@@ -2,6 +2,7 @@ package xyz.ganghua.utils;
 
 import java.util.Base64;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
@@ -12,6 +13,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import xyz.ganghua.entity.Users;
 
 public class JwtUtil {
 
@@ -85,6 +87,9 @@ public class JwtUtil {
         long expMillis = currentTimeMillis + ttlMillis;
         Date expDate = new Date(expMillis);
         JwtBuilder builder = Jwts.builder();
+        // map.forEach((k, y) -> {
+        // builder.claim(k, y);
+        // });
         builder.setClaims(map);
         builder.setId(uuid);
         builder.setSubject(JwtUtil.JWT_KEY);
@@ -115,20 +120,19 @@ public class JwtUtil {
     }
 
     public static void main(String[] args) {
-        // Map<String, Object> hashMap = new HashMap<>();
-        // Users users = new Users();
-        // users.setId(1234L);
-        // users.setName("lucy");
-        // users.setPassword("1234");
-        // hashMap.put("users", users);
-        // String createJWT = createJWT(hashMap);
-        // System.out.println(createJWT);
+        Map<String, Object> hashMap = new HashMap<>();
+        Users users = new Users();
+        users.setId(1234L);
+        users.setName("lucy");
+        users.setPassword("1234");
+        hashMap.put("users", users);
 
-        Claims parseJwt = parseJwt(
-            "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJnYW5naHVhIiwiZXhwIjoxNjU3NzcyMDIwLCJpYXQiOjE2NTc3Njg0MjAsImp0aSI6IjhjZWFkYzdhMTI0YTQyOGNiNjU5MGQ4YzRjN2FkNTAyIiwibG9naW4xIjp7ImlkIjoxLCJuYW1lIjoibGlzaSIsInBhc3N3b3JkIjoiJDJhJDEwJHp4aE44UEdBbFZaWjIxLktUMGRiQy5ZUXdmS1pKblFPVmNHZnlYUlpxWk10WkVvM28xa3dtIiwiYWRkciI6IuWMl-S6rCIsImdlbmRlciI6IueUtyIsInVwZGF0ZVRpbWUiOjE2MzQ2OTM2NDgwMDB9fQ.r5m_ZMR1t222fvbxD9gE-uCq-G7Oy8tSxFDYVFDUNls");
-        System.out.println(parseJwt);
-        Map<String, Object> object = (Map<String, Object>)parseJwt.get("users");
+        String createJWT = createJWT(hashMap);
+        System.out.println(createJWT);
 
+        Claims claims = parseJwt(createJWT);
+        System.out.println(claims);
+        Users object = claims.get("users", Users.class);
         System.out.println(object);
 
     }

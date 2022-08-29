@@ -35,6 +35,7 @@ public class SecuritConfig extends WebSecurityConfigurerAdapter {
             .antMatchers("/user/login").anonymous()
             // 除登录接口外的所有请求全部需要鉴权认证
             .anyRequest().authenticated();
+
         // 在UsernamePasswordAuthenticationFilter过滤器之前，添加新过滤器
         http.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
     }
