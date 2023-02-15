@@ -1,6 +1,10 @@
 server:
   port: 80
 
+jasypt:
+  encryptor:
+    password: qwera@12345
+
 spring:
   datasource:
     name: external-data
@@ -12,29 +16,27 @@ spring:
       connection-timeout: 10000
       idle-timeout: 600000
       max-lifetime: 3600000
-
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    database: 0
+    password: 123456
+    
 database:
-  username: root
-  password: root
-  host: localhost
-  port: 3306
-  dbname: datacenter
+  username: ENC(3W6u5nkhzyoAucXe8lVoeg==)
+  password: ENC(U+3vFrEXFMo9G5ThhXi3QA==)
+  host: ENC(zU8yIGZfgCeFx+Sx8/nsM6RUU6Evy+Q0)
+  port: ENC(NY2q530m71cO+c4oZNDaWA==)
+  dbname: ENC(becneSOoLJya/QjNA4X8oMcOuJF0Bbvy)
+#elasticsearch:
+#  schema: http
+#  address: 127.0.0.1:9200
+#  connectTimeout: 600000
+#  socketTimeout: 600000
+#  connectionRequestTimeout: 600000
+#  maxConnectNum: 100
+#  maxConnectPerRoute: 100
 
-elasticsearch:
-  schema: http
-  address: 127.0.0.1:9200
-  connectTimeout: 600000
-  socketTimeout: 600000
-  connectionRequestTimeout: 600000
-  maxConnectNum: 100
-  maxConnectPerRoute: 100
-  
-debug: true
 logging:
   level:
-    xyz.ganghua: debug
-
-
-
-
-
+    xyz.ganghua: info
