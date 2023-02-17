@@ -12,6 +12,7 @@ public class ThreadLocalDemo {
                 System.out.println(DataUtils.parse("2022-07-24 16:34:30"));
             });
         }
+        newFixedThreadPool.shutdown();
 
     }
 }
