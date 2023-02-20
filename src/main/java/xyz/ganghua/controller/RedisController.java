@@ -47,7 +47,7 @@ public class RedisController {
             public String invokeAfterLockAquire() {
                 try {
                     System.out.println("处理业务逻辑。。。。。");
-                    Thread.sleep(5000L);
+                    Thread.sleep(10 * 1000L);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
