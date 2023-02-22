@@ -149,6 +149,19 @@
             <artifactId>redisson-spring-boot-starter</artifactId>
             <version>3.16.6</version>
         </dependency> -->
+        
+        <!-- 简单整合kafka依赖 -->
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
+        </dependency>
+        
+        <!-- 简化开发环节验证Kafka相关功能 -->
+        <dependency>
+           <groupId>org.springframework.kafka</groupId>
+           <artifactId>spring-kafka-test</artifactId>
+           <scope>test</scope>
+        </dependency>
 
     </dependencies>
 

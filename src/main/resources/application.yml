@@ -22,6 +22,9 @@ spring:
     password: 123456
 #    redisson: 
 #      file: classpath:redisson.yml
+  kakfa:
+    producer:
+      bootstrap-servers: 127.0.0.1:9092
 
 
 
