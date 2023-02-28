@@ -43,5 +43,5 @@ database:
 #  maxConnectPerRoute: 100
 
 logging:
-  level:
-    xyz.ganghua: info
+  config: classpath:log4j2.xml
+

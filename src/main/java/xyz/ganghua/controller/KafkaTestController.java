@@ -58,7 +58,6 @@ public class KafkaTestController {
 
         List<String> asList = Arrays.asList(topic);
         // 转换成线程安全类
-
         List<String> synchronizedList = Collections.synchronizedList(asList);
 
         String topicInfo = kafkaUtils.getTopicInfo(asList);
@@ -88,6 +87,23 @@ public class KafkaTestController {
     }
 
     /**
+     * kafkaListener监听组 topic
+     * 
+     * @param input
+     */
+    @KafkaListener(id = "kafkaLog", topics = "kafka-log")
+    public void listenKafkaLogs(String input) {
+        System.out.println("success往kafka输送日志： " + input);
+    }
+
+    @GetMapping("/logs")
+    public void testLog4j2ToKafka() {
+        for (int i = 0; i < 100; i++) {
+            logger.warn("测试细腻。。。。。。,这是往日志信息里面写的东西，会输出到kafka里面topic为 kafka-log里面： " + i);
+        }
+    }
+
+    /**
      * kafka回调方法测试
      * 
      * @param message
@@ -110,7 +126,8 @@ public class KafkaTestController {
 
     @GetMapping("/sendCallback2/{message}")
     public void sendCallback2(@PathVariable String message) {
-        kafkaTemplate.send("topic1", message).addCallback(new ListenableFutureCallback<SendResult<Object, Object>>() {
+        logger.info("测试细腻。。。。。。。。。。。,这是往日志信息里面写的东西，会输出到kafka里面");
+        kafkaTemplate.send(TOPIC, message).addCallback(new ListenableFutureCallback<SendResult<Object, Object>>() {
 
             @Override
             public void onSuccess(SendResult<Object, Object> result) {
@@ -123,6 +140,7 @@ public class KafkaTestController {
                 System.out.println("发送消息失败：" + ex.getMessage());
             }
         });
+        logger.warn("警告信息、、、、、。。。");
     }
 
 }
