@@ -28,6 +28,18 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        
+        <!-- 日志框架改为使用log4j2 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-log4j2</artifactId>
         </dependency>
      
         <dependency>
@@ -149,6 +161,19 @@
             <artifactId>redisson-spring-boot-starter</artifactId>
             <version>3.16.6</version>
         </dependency> -->
+        
+        <!-- 简单整合kafka依赖 -->
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
+        </dependency>
+        
+        <!-- 简化开发环节验证Kafka相关功能, 提供一个kafka服务端的能力，包括分片，副本数的定义-->
+        <dependency>
+           <groupId>org.springframework.kafka</groupId>
+           <artifactId>spring-kafka-test</artifactId>
+           <scope>test</scope>
+        </dependency>
 
     </dependencies>
 
