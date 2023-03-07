@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.support.KafkaUtils;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.util.concurrent.ListenableFutureCallback;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import xyz.ganghua.utils.KafkaUtils;
+import xyz.ganghua.utils.SpringKafkaUtils;
 import xyz.ganghua.vo.KafkaResp;
 
 @RestController
@@ -30,7 +31,7 @@ public class KafkaTestController {
     private KafkaTemplate<Object, Object> kafkaTemplate;
 
     @Autowired
-    private KafkaUtils kafkaUtils;
+    private SpringKafkaUtils springKafkaUtils;
 
     /**
      * 获取所有topic
@@ -39,12 +40,11 @@ public class KafkaTestController {
      */
     @GetMapping("/get/topics")
     public KafkaResp getTopciAll() {
-        List<String> allTopic = kafkaUtils.getAllTopic();
+        List<String> allTopic = springKafkaUtils.getAllTopic();
         KafkaResp kafkaResp = new KafkaResp();
         kafkaResp.setLists(allTopic);
         kafkaResp.success();
         return kafkaResp;
-
     }
 
     /**
@@ -56,11 +56,13 @@ public class KafkaTestController {
     @GetMapping("get/{topic}")
     public KafkaResp getBytTopic(@PathVariable String topic) {
 
+        String consumerGroupId = KafkaUtils.getConsumerGroupId();
+        System.out.println(">>consumerGroupId:  " + consumerGroupId);
         List<String> asList = Arrays.asList(topic);
         // 转换成线程安全类
         List<String> synchronizedList = Collections.synchronizedList(asList);
 
-        String topicInfo = kafkaUtils.getTopicInfo(asList);
+        String topicInfo = springKafkaUtils.getTopicInfo(asList);
         KafkaResp kafkaResp = new KafkaResp();
         kafkaResp.success(topicInfo);
         return kafkaResp;

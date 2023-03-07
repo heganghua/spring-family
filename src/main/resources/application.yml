@@ -24,6 +24,8 @@ spring:
 #      file: classpath:redisson.yml
   kafka:
     bootstrap-servers: 127.0.0.1:9092
+    producer:
+      acks: 1
 
 
 

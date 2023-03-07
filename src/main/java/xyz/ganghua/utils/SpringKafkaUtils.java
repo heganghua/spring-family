@@ -23,7 +23,7 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
 @Component
-public class KafkaUtils {
+public class SpringKafkaUtils {
 
     @Value("${spring.kafka.bootstrap-servers}")
     private String springKafkaBootstrapServers;
