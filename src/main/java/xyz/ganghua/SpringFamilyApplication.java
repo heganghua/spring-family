@@ -19,5 +19,4 @@ public class SpringFamilyApplication {
     public HandlerInterceptor getActionInterceptor() {
         return null;
     }
-
 }
